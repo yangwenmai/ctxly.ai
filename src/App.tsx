@@ -10,7 +10,6 @@ export default function App() {
       navFeatures: 'Features',
       navChangelog: 'Changelog',
       navFeedback: 'Feedback',
-      navGitHub: 'GitHub',
       heroTitle: 'Stay in Flow. Know Your Context.',
       heroSubtitle:
         'A lightweight macOS menu bar app that helps knowledge workers quantify and optimize attention to stay focused and productive.',
@@ -19,7 +18,7 @@ export default function App() {
       featuresTitle: 'Core Features',
       features: [
         { title: '🧠 Intelligent Monitoring', desc: 'Detect read/write states and context switches accurately.' },
-        { title: '⏱️ Real‑time Feedback', desc: 'Menu bar shows current focus state (📝 writing, 👁️ reading, 🧠 idle, 🔒 locked).' },
+        { title: '⏱️ Real‑time Feedback', desc: 'Menu bar shows current focus state (📝 writing, 👁️ reading).' },
         { title: '📈 Data Metrics', desc: 'Today’s writing time, reading time, switch count, longest focus session.' },
         { title: '🎯 Focus Session Details', desc: 'Record and display your longest focus session (app, period, mode, duration).' },
         { title: '🔔 Periodic Reminders', desc: 'Hourly focus summary notifications.' },
@@ -36,14 +35,12 @@ export default function App() {
       footerFeedback: 'Feedback',
       footerIssues: 'Issues',
       footerChangelog: 'Changelog',
-      footerGitHub: 'GitHub',
     },
     zh: {
       brand: 'Contextly',
       navFeatures: '功能',
       navChangelog: '更新日志',
       navFeedback: '反馈',
-      navGitHub: 'GitHub',
       heroTitle: '保持心流，知晓你的上下文。',
       heroSubtitle:
         'Contextly 是一款轻量级的 macOS 菜单栏应用，帮助知识型工作者量化并优化注意力管理，提升专注与生产力。',
@@ -52,7 +49,7 @@ export default function App() {
       featuresTitle: '核心功能',
       features: [
         { title: '🧠 智能监测', desc: '区分读写状态，精准识别上下文切换。' },
-        { title: '⏱️ 实时反馈', desc: '菜单栏图标显示当前专注状态（📝写作 👁️阅读 🧠空闲 🔒锁屏）。' },
+        { title: '⏱️ 实时反馈', desc: '菜单栏图标显示当前专注状态（📝写作 👁️阅读）。' },
         { title: '📈 数据统计', desc: '今日写作时间、阅读时间、切换次数、最长专注时长。' },
         { title: '🎯 专注会话详情', desc: '记录并显示最长专注会话（应用、时间段、读写模式、时长）。' },
         { title: '🔔 定期提醒', desc: '每小时专注度概况通知。' },
@@ -69,7 +66,6 @@ export default function App() {
       footerFeedback: '反馈',
       footerIssues: '问题',
       footerChangelog: '更新日志',
-      footerGitHub: 'GitHub',
     }
   }
 
@@ -103,7 +99,6 @@ export default function App() {
           <a href="#features" className="text-sm hover:underline">{t.navFeatures}</a>
           <a href="https://github.com/yangwenmai/ctxly.ai/releases" target="_blank" rel="noopener noreferrer" className="text-sm hover:underline">{messages[language].navChangelog}</a>
           <a href="https://github.com/yangwenmai/ctxly.ai/discussions" target="_blank" rel="noopener noreferrer" className="text-sm hover:underline">{messages[language].navFeedback}</a>
-          <a href="https://github.com/yangwenmai/ctxly.ai" target="_blank" rel="noopener noreferrer" className="text-sm hover:underline">{messages[language].navGitHub}</a>
           <div className="pl-4 ml-2 border-l border-gray-200 flex items-center space-x-2">
             <a className={['text-sm', language === 'en' ? 'font-semibold' : 'opacity-60', 'hover:underline'].join(' ')} href={window.location.pathname + '?lang=en'}>EN</a>
             <span className="text-gray-300">|</span>
@@ -165,7 +160,6 @@ export default function App() {
           <a href="https://github.com/yangwenmai/ctxly.ai/discussions" target="_blank" rel="noopener noreferrer" className="hover:underline">{messages[language].footerFeedback}</a>
           <a href="https://github.com/yangwenmai/ctxly.ai/issues" target="_blank" rel="noopener noreferrer" className="hover:underline">{messages[language].footerIssues}</a>
           <a href="https://github.com/yangwenmai/ctxly.ai/releases" target="_blank" rel="noopener noreferrer" className="hover:underline">{messages[language].footerChangelog}</a>
-          <a href="https://github.com/yangwenmai/ctxly.ai" target="_blank" rel="noopener noreferrer" className="hover:underline">{messages[language].footerGitHub}</a>
         </div>
       </footer>
     </div>
