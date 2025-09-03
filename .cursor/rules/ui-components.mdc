@@ -1,0 +1,41 @@
+---
+globs: *.tsx
+description: UI 组件使用规范（Button, Card）
+---
+
+## 组件位置
+
+* Button: [src/components/ui/button.tsx](mdc:src/components/ui/button.tsx)
+* Card: [src/components/ui/card.tsx](mdc:src/components/ui/card.tsx)
+
+## Button API
+
+* props: variant ('default' | 'outline'), size ('sm' | 'md' | 'lg'), asChild (boolean)，其余继承自 button。
+* asChild=true 时，会将样式注入到子元素（通常是 <a>）。
+
+```tsx
+import { Button } from '@/components/ui/button'
+
+<Button size="lg">Primary</Button>
+<Button variant="outline" asChild>
+  <a href="/docs">Docs</a>
+</Button>
+```
+
+## Card 组合
+
+* 结构：<Card><CardContent /></Card>
+
+```tsx
+import { Card, CardContent } from '@/components/ui/card'
+
+<Card className="rounded-2xl shadow-sm">
+  <CardContent className="p-6">Content</CardContent>
+  {/* 可在外层追加更多内容分块 */}
+</Card>
+```
+
+## 风格约定
+
+* 不在组件内部写死业务文案；样式通过 className 叠加。
+* 避免直接传入 style 行内样式，优先使用 Tailwind 类。

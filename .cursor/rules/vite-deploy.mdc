@@ -1,0 +1,19 @@
+---
+description: Vite 构建与发布约定
+---
+
+## 基础配置
+
+* Vite 配置见 [vite.config.ts](mdc:vite.config.ts)，React 插件已启用。
+* base 为 '/'，适配自定义域名（`public/CNAME` 为 ctxly.ai）。
+
+## 脚本命令
+
+* 开发：`npm run dev`
+* 构建：`npm run build`
+* 预览：`npm run preview`
+
+## 静态资源与部署
+
+* 构建产物输出到 `dist/`，可直接部署到静态托管（如 GitHub Pages/Cloudflare Pages）。
+* 若更换部署根路径，需同步更新 `vite.config.ts` 的 `base` 字段。

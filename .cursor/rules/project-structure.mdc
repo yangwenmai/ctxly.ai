@@ -1,0 +1,26 @@
+---
+alwaysApply: true
+description: 项目结构与关键入口指引，帮助 Agent 快速定位代码
+---
+
+## 项目结构
+
+- 入口 HTML: [index.html](mdc:index.html)
+- 前端入口: [src/main.tsx](mdc:src/main.tsx)
+- 根组件: [src/App.tsx](mdc:src/App.tsx)
+- UI 组件: [src/components/ui/button.tsx](mdc:src/components/ui/button.tsx), [src/components/ui/card.tsx](mdc:src/components/ui/card.tsx)
+- 样式入口: [src/index.css](mdc:src/index.css)（Tailwind v4）
+- 配置文件: [vite.config.ts](mdc:vite.config.ts), [tsconfig.json](mdc:tsconfig.json), [postcss.config.js](mdc:postcss.config.js)
+- 包信息: [package.json](mdc:package.json)
+
+## 运行与构建
+
+- 开发: `pnpm dev` 或 `npm run dev`
+- 构建: `pnpm build` 或 `npm run build`
+- 预览: `pnpm preview` 或 `npm run preview`
+
+## 约定
+
+- 使用 React 19 + Vite 7 + TypeScript 严格模式。
+- Tailwind v4，通过 `@import "tailwindcss";` 方式启用。
+- 站点基础路径 `base: '/'`（自定义域 `ctxly.ai`）。

@@ -1,0 +1,22 @@
+---
+globs: *.tsx,*.css
+description: Tailwind v4 使用约定
+---
+
+## 启用方式
+
+* 样式入口为 [src/index.css](mdc:src/index.css)，通过 `@import "tailwindcss";` 引入。
+* PostCSS 插件在 [postcss.config.js](mdc:postcss.config.js) 中配置。
+
+## 使用原则
+
+* 以原子类为主，必要时组合到组件 props 的 className。
+* 色彩与间距遵循现有设计（黑白灰为主，轻阴影）。
+* 优先使用响应式断点类（如 md:、lg:）实现布局自适应。
+* 禁止随意引入自定义全局 CSS，必要时局部覆盖。
+
+## 示例
+
+```tsx
+<div className="min-h-screen flex flex-col bg-white text-gray-900" />
+```

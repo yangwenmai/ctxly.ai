@@ -1,0 +1,20 @@
+---
+globs: src/**/*.tsx
+description: 文案与多语言（en/zh）约定
+---
+
+## 语言切换
+
+* 语言集合：'en' | 'zh'，默认根据浏览器语言推断，支持 ?lang=en|zh 覆盖。
+* 持久化 key：`ctxly_lang`，存储于 localStorage。
+* 相关实现参考 [src/App.tsx](mdc:src/App.tsx)。
+
+## 文案组织
+
+* 所有用户可见文案放入 messages 对象（en/zh）下。
+* UI 显示使用派生对象 `t = useMemo(() => messages[language], [language])`。
+* 避免在渲染处写死字符串；新增文案应同时提供 en/zh。
+
+## 外链
+
+* 外链均使用 target="_blank" 搭配 rel="noopener noreferrer"。

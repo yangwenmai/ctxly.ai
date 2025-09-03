@@ -1,0 +1,33 @@
+---
+globs: *.ts,*.tsx
+description: TypeScript/React 代码风格与约定
+---
+
+## TypeScript 约定
+
+* 启用严格模式，避免 any。导出 API 明确类型注解。
+* 变量/函数命名语义化：避免缩写，使用完整单词；函数用动词开头。
+* 优先使用字面量联合类型表达取值范围（如 'en' | 'zh'）。
+* 避免多层嵌套，优先早返回；必要时拆分小函数。
+
+## React 约定
+
+* 使用函数组件与 react-jsx。
+* Hooks 放在组件顶层；将副作用与计算逻辑分别放入 useEffect/useMemo。
+* 事件处理命名 handleXxx，派生状态使用 useMemo，避免重复计算。
+* 条件渲染优先短路与三元，避免深层 if 嵌套。
+* 列表渲染使用稳定 key（非索引，除非静态列表）。
+
+## 错误处理
+
+* 与浏览器 API/存储交互使用 try/catch 包裹（如 localStorage、URLSearchParams），并提供安全默认值。
+
+## 可访问性与交互
+
+* 交互元素必须可聚焦，确保键盘可用性；链接使用 <a>，按钮使用 <button>。
+* 外链使用 target="_blank" 必须搭配 rel="noopener noreferrer"。
+
+## 文件组织
+
+* UI 原子组件置于 src/components/ui/，页面级与复合组件置于上层目录。
+* 公共常量/工具应抽离，避免在组件中重复定义。
