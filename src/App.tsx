@@ -2,6 +2,7 @@ import { Button } from './components/ui/button'
 import { Card, CardContent } from './components/ui/card'
 import { motion } from 'framer-motion'
 import { useEffect, useMemo, useState } from 'react'
+import { SupportModal } from './components/ui/support-modal'
 
 export default function App() {
   const messages = {
@@ -10,6 +11,7 @@ export default function App() {
       navFeatures: 'Features',
       navChangelog: 'Changelog',
       navFeedback: 'Feedback',
+      supportAuthor: 'Support the Author',
       heroTitle: 'Stay in Flow. Know Your Context.',
       heroSubtitle:
         'A lightweight macOS menu bar app that helps knowledge workers quantify and optimize attention to stay focused and productive.',
@@ -35,12 +37,20 @@ export default function App() {
       footerFeedback: 'Feedback',
       footerIssues: 'Issues',
       footerChangelog: 'Changelog',
+      footerSupport: 'Support',
+      supportModalTitle: 'Buy me a coffee ☕',
+      supportModalDesc: 'Thank you for supporting! Your encouragement helps us iterate Contextly.',
+      supportModalNote: 'Choose a payment method',
+      supportModalBmcBtn: 'Support on Buy Me a Coffee',
+      supportModalWeChat: 'WeChat Pay',
+      supportModalBmc: 'Buy Me a Coffee',
     },
     zh: {
       brand: 'Contextly',
       navFeatures: '功能',
       navChangelog: '更新日志',
       navFeedback: '反馈',
+      supportAuthor: '支持作者',
       heroTitle: '保持心流，知晓你的上下文。',
       heroSubtitle:
         'Contextly 是一款轻量级的 macOS 菜单栏应用，帮助知识型工作者量化并优化注意力管理，提升专注与生产力。',
@@ -66,10 +76,18 @@ export default function App() {
       footerFeedback: '反馈',
       footerIssues: '问题',
       footerChangelog: '更新日志',
+      footerSupport: '支持作者',
+      supportModalTitle: '请作者喝杯咖啡 ☕',
+      supportModalDesc: '感谢你的支持！你的鼓励能帮助我们持续迭代 Contextly。',
+      supportModalNote: '请选择支付方式',
+      supportModalBmcBtn: '去 Buy Me a Coffee 支持',
+      supportModalWeChat: '微信支付',
+      supportModalBmc: 'Buy Me a Coffee',
     }
   }
 
   const [language, setLanguage] = useState<'en' | 'zh'>('en')
+  const [supportOpen, setSupportOpen] = useState(false)
 
   useEffect(() => {
     try {
@@ -99,6 +117,18 @@ export default function App() {
           <a href="#features" className="text-sm hover:underline">{t.navFeatures}</a>
           <a href="https://github.com/yangwenmai/ctxly.ai/releases" target="_blank" rel="noopener noreferrer" className="text-sm hover:underline">{messages[language].navChangelog}</a>
           <a href="https://github.com/yangwenmai/ctxly.ai/discussions" target="_blank" rel="noopener noreferrer" className="text-sm hover:underline">{messages[language].navFeedback}</a>
+          <button
+            type="button"
+            onClick={() => setSupportOpen(true)}
+            title={language === 'zh' ? '请作者喝咖啡支持本站' : 'Buy me a coffee'}
+            className="ml-2 inline-flex items-center"
+          >
+            <img
+              src="https://img.buymeacoffee.com/button-api/?text=&emoji=%E2%98%95&slug=maiyang&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff"
+              alt="Buy me a coffee"
+              className="h-8 rounded-md"
+            />
+          </button>
           <div className="pl-4 ml-2 border-l border-gray-200 flex items-center space-x-2">
             <a className={['text-sm', language === 'en' ? 'font-semibold' : 'opacity-60', 'hover:underline'].join(' ')} href={window.location.pathname + '?lang=en'}>EN</a>
             <span className="text-gray-300">|</span>
@@ -120,6 +150,9 @@ export default function App() {
           </Button>
           <Button variant="outline" size="lg" asChild>
             <a href="https://github.com/yangwenmai/ctxly.ai/discussions" target="_blank" rel="noopener noreferrer">{messages[language].giveFeedback}</a>
+          </Button>
+          <Button variant="outline" size="lg" onClick={() => setSupportOpen(true)}>
+            {language === 'zh' ? '支持作者' : 'Support the Author'}
           </Button>
         </div>
       </main>
@@ -160,8 +193,32 @@ export default function App() {
           <a href="https://github.com/yangwenmai/ctxly.ai/discussions" target="_blank" rel="noopener noreferrer" className="hover:underline">{messages[language].footerFeedback}</a>
           <a href="https://github.com/yangwenmai/ctxly.ai/issues" target="_blank" rel="noopener noreferrer" className="hover:underline">{messages[language].footerIssues}</a>
           <a href="https://github.com/yangwenmai/ctxly.ai/releases" target="_blank" rel="noopener noreferrer" className="hover:underline">{messages[language].footerChangelog}</a>
+          <button
+            type="button"
+            onClick={() => setSupportOpen(true)}
+            title={language === 'zh' ? '请作者喝咖啡支持本站' : 'Buy me a coffee'}
+            className="inline-flex items-center align-middle"
+          >
+            <img
+              src="https://img.buymeacoffee.com/button-api/?text=&emoji=%E2%98%95&slug=maiyang&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff"
+              alt="Buy me a coffee"
+              className="h-8 rounded-md"
+            />
+          </button>
         </div>
       </footer>
+      <SupportModal
+        open={supportOpen}
+        onClose={() => setSupportOpen(false)}
+        title={messages[language].supportModalTitle}
+        description={messages[language].supportModalDesc}
+        note={messages[language].supportModalNote}
+        buttonLabel={messages[language].supportModalBmcBtn}
+        enableWeChat={true}
+        wechatQrSrc={'/wechat-qr-code.png'}
+        wechatTitle={messages[language].supportModalWeChat}
+        bmcTitle={messages[language].supportModalBmc}
+      />
     </div>
   )
 }
