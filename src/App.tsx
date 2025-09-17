@@ -3,6 +3,7 @@ import { Card, CardContent } from './components/ui/card'
 import { motion } from 'framer-motion'
 import { useEffect, useMemo, useState } from 'react'
 import { SupportModal } from './components/ui/support-modal'
+import { ScreenshotCarousel } from './components/ui/screenshot-carousel'
 
 export default function App() {
   const messages = {
@@ -44,6 +45,25 @@ export default function App() {
       supportModalBmcBtn: 'Support on Buy Me a Coffee',
       supportModalWeChat: 'WeChat Pay',
       supportModalBmc: 'Buy Me a Coffee',
+      screenshotsTitle: 'App Screenshots',
+      screenshots: [
+        {
+          title: 'Menu Bar Status',
+          description: 'Real-time focus state indicator in your menu bar'
+        },
+        {
+          title: 'Focus Metrics',
+          description: 'Daily writing time, reading time, and context switches'
+        },
+        {
+          title: 'Session Details',
+          description: 'Detailed view of your longest focus sessions'
+        },
+        {
+          title: 'Advanced Analytics',
+          description: 'Work pattern recognition and cognitive cost analysis'
+        }
+      ],
     },
     zh: {
       brand: 'Contextly',
@@ -83,6 +103,25 @@ export default function App() {
       supportModalBmcBtn: '去 Buy Me a Coffee 支持',
       supportModalWeChat: '微信支付',
       supportModalBmc: 'Buy Me a Coffee',
+      screenshotsTitle: '应用截图',
+      screenshots: [
+        {
+          title: '菜单栏状态',
+          description: '菜单栏实时显示专注状态指示器'
+        },
+        {
+          title: '专注指标',
+          description: '每日写作时间、阅读时间和上下文切换统计'
+        },
+        {
+          title: '会话详情',
+          description: '最长专注会话的详细信息展示'
+        },
+        {
+          title: '高级分析',
+          description: '工作模式识别和认知成本分析'
+        }
+      ],
     }
   }
 
@@ -144,7 +183,7 @@ export default function App() {
         <motion.p className="text-lg text-gray-600 max-w-2xl mb-8" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6 }}>
           {messages[language].heroSubtitle}
         </motion.p>
-        <div className="flex space-x-4">
+        <div className="flex space-x-4 mb-16">
           <Button size="lg" asChild>
             <a href="https://github.com/yangwenmai/ctxly.ai/releases/latest" target="_blank" rel="noopener noreferrer">{messages[language].download}</a>
           </Button>
@@ -155,6 +194,47 @@ export default function App() {
             {language === 'zh' ? '支持作者' : 'Support the Author'}
           </Button>
         </div>
+
+        {/* Screenshots Section */}
+        <motion.section 
+          className="w-full max-w-5xl"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.6 }}
+        >
+          <h3 className="text-2xl font-semibold mb-8">{messages[language].screenshotsTitle}</h3>
+          <ScreenshotCarousel
+            screenshots={[
+              {
+                src: '/screenshots/menubar-status.png',
+                alt: messages[language].screenshots[0].title,
+                title: messages[language].screenshots[0].title,
+                description: messages[language].screenshots[0].description
+              },
+              {
+                src: '/screenshots/focus-metrics.png',
+                alt: messages[language].screenshots[1].title,
+                title: messages[language].screenshots[1].title,
+                description: messages[language].screenshots[1].description
+              },
+              {
+                src: '/screenshots/session-details.png',
+                alt: messages[language].screenshots[2].title,
+                title: messages[language].screenshots[2].title,
+                description: messages[language].screenshots[2].description
+              },
+              {
+                src: '/screenshots/advanced-analytics.png',
+                alt: messages[language].screenshots[3].title,
+                title: messages[language].screenshots[3].title,
+                description: messages[language].screenshots[3].description
+              }
+            ]}
+            autoPlay={true}
+            interval={5000}
+            className="mb-8"
+          />
+        </motion.section>
       </main>
 
       <section id="features" className="px-6 py-16 max-w-6xl mx-auto">
