@@ -22,9 +22,11 @@ export default function App() {
       features: [
         { title: '🧠 Intelligent Monitoring', desc: 'Detect read/write states and context switches accurately.' },
         { title: '⏱️ Real‑time Feedback', desc: 'Menu bar shows current focus state (📝 writing, 👁️ reading).' },
-        { title: '📈 Data Metrics', desc: 'Today’s writing time, reading time, switch count, longest focus session.' },
+        { title: '📈 Data Metrics', desc: 'Accurate daily metrics: writing time, reading time, switch count, and longest focus session.' },
+        { title: '📊 App Session Stats', desc: 'Track session duration and switch count for each app, identify focus vs distraction patterns.' },
+        { title: '💾 Data Export', desc: 'Export your statistics in JSON format for backup and external analysis.' },
         { title: '🎯 Focus Session Details', desc: 'Record and display your longest focus session (app, period, mode, duration).' },
-        { title: '🔔 Periodic Reminders', desc: 'Hourly focus summary notifications.' },
+        { title: '🔔 Periodic Reminders', desc: 'Smart hourly notifications with actionable insights (avoids deep focus interruptions).' },
         { title: '🔒 Privacy‑first', desc: 'All data stored locally, zero upload.' }
       ],
       advancedTitle: '🎛️ Advanced Analysis (opt‑in)',
@@ -45,6 +47,14 @@ export default function App() {
       supportModalBmcBtn: 'Support on Buy Me a Coffee',
       supportModalWeChat: 'WeChat Pay',
       supportModalBmc: 'Buy Me a Coffee',
+      whatsNewTitle: 'What\'s New in v1.2.0',
+      whatsNewSubtitle: 'Latest improvements to help you stay focused',
+      whatsNewItems: [
+        { title: '📊 App Session Statistics', desc: 'Detailed session duration and switch patterns for each app' },
+        { title: '💾 Data Export', desc: 'Export your focus data in JSON format for backup and analysis' },
+        { title: '⚡ Smarter Notifications', desc: 'Improved hourly reminders that avoid interrupting deep focus' },
+        { title: '🎯 Enhanced Accuracy', desc: 'Fixed switch counting and midnight statistics issues' }
+      ],
       screenshotsTitle: 'App Screenshots',
       screenshots: [
         {
@@ -80,9 +90,11 @@ export default function App() {
       features: [
         { title: '🧠 智能监测', desc: '区分读写状态，精准识别上下文切换。' },
         { title: '⏱️ 实时反馈', desc: '菜单栏图标显示当前专注状态（📝写作 👁️阅读）。' },
-        { title: '📈 数据统计', desc: '今日写作时间、阅读时间、切换次数、最长专注时长。' },
+        { title: '📈 数据统计', desc: '精准的每日数据：写作时间、阅读时间、切换次数、最长专注时长。' },
+        { title: '📊 应用会话统计', desc: '追踪每个应用的会话时长和切换次数，识别专注与分心模式。' },
+        { title: '💾 数据导出', desc: '导出统计数据为 JSON 格式，支持备份与外部分析。' },
         { title: '🎯 专注会话详情', desc: '记录并显示最长专注会话（应用、时间段、读写模式、时长）。' },
-        { title: '🔔 定期提醒', desc: '每小时专注度概况通知。' },
+        { title: '🔔 定期提醒', desc: '智能每小时通知，提供可操作建议（避免深度专注打扰）。' },
         { title: '🔒 隐私优先', desc: '所有数据本地存储，零上传。' }
       ],
       advancedTitle: '🎛️ 高级分析功能（按需开启）',
@@ -103,6 +115,14 @@ export default function App() {
       supportModalBmcBtn: '去 Buy Me a Coffee 支持',
       supportModalWeChat: '微信支付',
       supportModalBmc: 'Buy Me a Coffee',
+      whatsNewTitle: 'v1.2.0 新功能',
+      whatsNewSubtitle: '最新改进助你保持专注',
+      whatsNewItems: [
+        { title: '📊 应用会话统计', desc: '详细记录每个应用的会话时长和切换模式' },
+        { title: '💾 数据导出', desc: '导出专注数据为 JSON 格式，支持备份和分析' },
+        { title: '⚡ 智能通知', desc: '改进每小时提醒，避免打断深度专注' },
+        { title: '🎯 准确性增强', desc: '修复切换计数和午夜统计问题' }
+      ],
       screenshotsTitle: '应用截图',
       screenshots: [
         {
@@ -195,12 +215,35 @@ export default function App() {
           </Button>
         </div>
 
-        {/* Screenshots Section */}
-        <motion.section 
-          className="w-full max-w-5xl"
+        {/* What's New Section */}
+        <motion.section
+          className="w-full max-w-4xl mb-16"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.6 }}
+        >
+          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl p-8 md:p-12">
+            <div className="text-center mb-8">
+              <h3 className="text-3xl font-bold mb-2">{t.whatsNewTitle}</h3>
+              <p className="text-gray-600">{t.whatsNewSubtitle}</p>
+            </div>
+            <div className="grid md:grid-cols-2 gap-6">
+              {t.whatsNewItems.map((item, idx) => (
+                <div key={idx} className="bg-white rounded-xl p-6 shadow-sm">
+                  <h4 className="text-lg font-semibold mb-2">{item.title}</h4>
+                  <p className="text-gray-600 text-sm">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.section>
+
+        {/* Screenshots Section */}
+        <motion.section
+          className="w-full max-w-5xl"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.6 }}
         >
           <h3 className="text-2xl font-semibold mb-8">{messages[language].screenshotsTitle}</h3>
           <ScreenshotCarousel
