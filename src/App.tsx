@@ -41,6 +41,8 @@ export default function App() {
       footerIssues: 'Issues',
       footerChangelog: 'Changelog',
       footerSupport: 'Support',
+      footerPV: 'PV',
+      footerUV: 'UV',
       supportModalTitle: 'Buy me a coffee ☕',
       supportModalDesc: 'Thank you for supporting! Your encouragement helps us iterate Contextly.',
       supportModalNote: 'Choose a payment method',
@@ -109,6 +111,8 @@ export default function App() {
       footerIssues: '问题',
       footerChangelog: '更新日志',
       footerSupport: '支持作者',
+      footerPV: '访问量',
+      footerUV: '访客数',
       supportModalTitle: '请作者喝杯咖啡 ☕',
       supportModalDesc: '感谢你的支持！你的鼓励能帮助我们持续迭代 Contextly。',
       supportModalNote: '请选择支付方式',
@@ -310,8 +314,13 @@ export default function App() {
       </section>
 
       <footer className="border-t border-gray-200 px-6 py-6 flex flex-col md:flex-row items-center justify-between text-sm text-gray-500">
-        <p>© 2025 Contextly</p>
-        <div className="space-x-4">
+        <div className="flex items-center space-x-4">
+          <p>© 2026 Contextly</p>
+          <span className="text-gray-300">|</span>
+          <span>{messages[language].footerPV}: <span id="urlstat-page-pv">-</span></span>
+          <span>{messages[language].footerUV}: <span id="urlstat-page-uv">-</span></span>
+        </div>
+        <div className="space-x-4 mt-4 md:mt-0">
           <a href="https://github.com/yangwenmai/ctxly.ai/releases/latest" target="_blank" rel="noopener noreferrer" className="hover:underline">{messages[language].footerDownload}</a>
           <a href="https://github.com/yangwenmai/ctxly.ai/discussions" target="_blank" rel="noopener noreferrer" className="hover:underline">{messages[language].footerFeedback}</a>
           <a href="https://github.com/yangwenmai/ctxly.ai/issues" target="_blank" rel="noopener noreferrer" className="hover:underline">{messages[language].footerIssues}</a>
