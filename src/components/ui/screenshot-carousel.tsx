@@ -50,35 +50,23 @@ export function ScreenshotCarousel({
 
   return (
     <div className={`relative w-full max-w-4xl mx-auto ${className}`}>
-      <Card className="overflow-hidden rounded-2xl shadow-lg">
-        <div className="relative aspect-video bg-gray-100">
+      <Card className="overflow-hidden rounded-3xl border-stone-200 shadow-[0_30px_80px_-40px_rgba(28,25,23,0.35)]">
+        <div className="relative aspect-[4/5] sm:aspect-[16/10] bg-stone-100">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
-              initial={{ opacity: 0, x: 300 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -300 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="absolute inset-0"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+              className="absolute inset-0 p-6 sm:p-10"
             >
               <img
                 src={screenshots[currentIndex].src}
                 alt={screenshots[currentIndex].alt}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain drop-shadow-xl"
                 loading="lazy"
               />
-              {screenshots[currentIndex].title && (
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">
-                  <h3 className="text-white text-lg font-semibold mb-1">
-                    {screenshots[currentIndex].title}
-                  </h3>
-                  {screenshots[currentIndex].description && (
-                    <p className="text-white/90 text-sm">
-                      {screenshots[currentIndex].description}
-                    </p>
-                  )}
-                </div>
-              )}
             </motion.div>
           </AnimatePresence>
 
@@ -106,6 +94,15 @@ export function ScreenshotCarousel({
             </>
           )}
         </div>
+
+        {screenshots[currentIndex].title && (
+          <div className="border-t border-stone-200 bg-white px-6 pt-5 text-center">
+            <h3 className="text-base font-semibold text-stone-900">{screenshots[currentIndex].title}</h3>
+            {screenshots[currentIndex].description && (
+              <p className="mt-1 text-sm text-stone-500">{screenshots[currentIndex].description}</p>
+            )}
+          </div>
+        )}
 
         {/* Dots indicator */}
         {screenshots.length > 1 && (
