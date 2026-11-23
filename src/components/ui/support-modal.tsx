@@ -11,7 +11,10 @@ type SupportModalProps = {
   enableWeChat?: boolean
   wechatQrSrc?: string
   wechatTitle?: string
+  wechatHint?: string
   bmcTitle?: string
+  bmcHint?: string
+  closeLabel?: string
 }
 
 export const SupportModal: React.FC<SupportModalProps> = ({
@@ -25,7 +28,10 @@ export const SupportModal: React.FC<SupportModalProps> = ({
   enableWeChat = true,
   wechatQrSrc = '/wechat-qr-code.png',
   wechatTitle = '微信支付',
+  wechatHint = '使用微信扫一扫进行支持（写备注或加我微信：mai_yang）',
   bmcTitle = 'Buy Me a Coffee',
+  bmcHint = '支持信用卡 / PayPal',
+  closeLabel = 'Close',
 }) => {
   if (!open) return null
 
@@ -44,7 +50,7 @@ export const SupportModal: React.FC<SupportModalProps> = ({
           <button
             onClick={onClose}
             className="text-gray-500 hover:text-gray-700"
-            aria-label="Close"
+            aria-label={closeLabel}
           >
             ×
           </button>
@@ -60,7 +66,7 @@ export const SupportModal: React.FC<SupportModalProps> = ({
               <div className="border border-gray-200 rounded-lg p-4 text-center">
                 <div className="text-sm font-semibold mb-3">{wechatTitle}</div>
                 <img src={wechatQrSrc} alt="WeChat Pay" className="max-w-full h-auto mx-auto rounded" />
-                <p className="text-xs text-gray-500 mt-2">使用微信扫一扫进行支持<br />（写备注或加我微信：mai_yang）</p>
+                <p className="text-xs text-gray-500 mt-2">{wechatHint}</p>
               </div>
             )}
 
@@ -75,7 +81,7 @@ export const SupportModal: React.FC<SupportModalProps> = ({
               >
                 {buttonLabel}
               </a>
-              <p className="text-xs text-gray-500 mt-2">支持信用卡 / PayPal</p>
+              <p className="text-xs text-gray-500 mt-2">{bmcHint}</p>
             </div>
           </div>
         </div>

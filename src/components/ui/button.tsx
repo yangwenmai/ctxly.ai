@@ -32,8 +32,8 @@ export const Button: React.FC<ButtonProps> = ({
     className,
   ].join(' ')
 
-  if (asChild && React.isValidElement(children)) {
-    return React.cloneElement(children as any, {
+  if (asChild && React.isValidElement<{ className?: string }>(children)) {
+    return React.cloneElement(children, {
       className: [children.props.className, classes].filter(Boolean).join(' '),
     })
   }
