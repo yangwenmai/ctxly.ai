@@ -1,6 +1,7 @@
 import { Button } from './components/ui/button'
 import { motion, useReducedMotion } from 'framer-motion'
 import { useEffect, useMemo, useState } from 'react'
+import { ScreenshotCarousel } from './components/ui/screenshot-carousel'
 import { SupportModal } from './components/ui/support-modal'
 
 type Language = 'en' | 'zh'
@@ -25,6 +26,17 @@ type TogetherStep = {
   body: string
 }
 
+type ScaleMark = {
+  value: string
+  unit: string
+  label: string
+}
+
+type ScreenshotCopy = {
+  title: string
+  description: string
+}
+
 type Copy = {
   pageTitle: string
   description: string
@@ -45,6 +57,16 @@ type Copy = {
   heroPrimary: string
   heroSecondary: string
   heroMeta: readonly string[]
+  storyEyebrow: string
+  storyTitle: string
+  storyScale: readonly ScaleMark[]
+  storyPlatforms: string
+  storyCounter: string
+  storyQuote: string
+  storyNote: string
+  storySignature: string
+  screenshotsTitle: string
+  screenshots: readonly ScreenshotCopy[]
   mockCaption: string
   mockStatus: string
   mockSegment: string
@@ -101,6 +123,13 @@ const BMC_BADGE_URL =
 
 const ribbonBars = ['bg-[#D97A2B]', 'bg-[#1F9A8A]', 'bg-[#E5484D]', 'bg-[#8E8E96]'] as const
 const ribbonWidths = ['w-[46%]', 'w-[28%]', 'w-[8%]', 'w-[18%]'] as const
+const scaleBars = ['w-full bg-[#1B1B1F]', 'w-[56%] bg-[#5B5BD6]', 'w-[14%] bg-[#D97A2B]', 'w-[4%] bg-[#E5484D]'] as const
+const screenshotSources = [
+  '/screenshots/menubar-status.png',
+  '/screenshots/focus-metrics.png',
+  '/screenshots/session-details.png',
+  '/screenshots/advanced-analytics.png',
+] as const
 
 const messages: Record<Language, Copy> = {
   en: {
@@ -125,6 +154,29 @@ const messages: Record<Language, Copy> = {
     heroPrimary: 'Download for macOS',
     heroSecondary: 'See the three parts',
     heroMeta: ['macOS menu bar', 'Data stays on this Mac', 'English and 中文'],
+    storyEyebrow: 'The problem',
+    storyTitle: 'The unit of our attention keeps shrinking.',
+    storyScale: [
+      { value: '45', unit: 'min', label: 'A class period at school' },
+      { value: '25', unit: 'min', label: 'One Pomodoro' },
+      { value: '1–2', unit: 'min', label: 'The rush of one short video' },
+      { value: 'Seconds', unit: '', label: 'Before the next swipe' },
+    ],
+    storyPlatforms:
+      'Douyin, Xiaohongshu, WeChat Channels, Bilibili, X, Instagram, TikTok — each one holds you with a one-or-two-minute rush, then the next, then the next. Your thumb won’t stop, and your mind finds it harder and harder to stay with one thing.',
+    storyCounter:
+      'Yet anything truly good — an essay, a piece of code, an idea — is supposed to be hard. It is ground out slowly, over long stretches of time.',
+    storyQuote: 'I built Contextly to save myself first.',
+    storyNote:
+      'It is not another productivity gadget. It is the tool I needed to pull myself out of the fragments: first see where my attention goes, then bring it back to the one thing that matters.',
+    storySignature: '— Mai Yang, author of Contextly',
+    screenshotsTitle: 'App Screenshots',
+    screenshots: [
+      { title: 'Menu Bar Status', description: 'Real-time focus state indicator in your menu bar' },
+      { title: 'Focus Metrics', description: 'Daily writing time, reading time, and context switches' },
+      { title: 'Session Details', description: 'Detailed view of your longest focus sessions' },
+      { title: 'Advanced Analytics', description: 'Work pattern recognition and cognitive cost analysis' },
+    ],
     mockCaption: 'An example, not your data',
     mockStatus: 'Writing in Notes',
     mockSegment: 'This stretch 06:12 · since 09:41',
@@ -251,6 +303,28 @@ const messages: Record<Language, Copy> = {
     heroPrimary: '下载 macOS 版',
     heroSecondary: '看看这三个部分',
     heroMeta: ['macOS 菜单栏', '数据留在本机', '中文 / English'],
+    storyEyebrow: '问题',
+    storyTitle: '注意力的刻度，正在一格一格变小。',
+    storyScale: [
+      { value: '45', unit: '分钟', label: '上学时的一堂课' },
+      { value: '25', unit: '分钟', label: '一个番茄钟' },
+      { value: '1–2', unit: '分钟', label: '一条短视频的爽感' },
+      { value: '秒级', unit: '', label: '下一次滑动之前' },
+    ],
+    storyPlatforms:
+      '抖音、小红书、视频号、B 站、X、Instagram、TikTok……每一个都用 1–2 分钟的爽感把你留住，然后是下一个，再下一个。手指停不下来，脑子却越来越难在一件事上多待一会儿。',
+    storyCounter: '可真正好的东西——一篇文章、一段代码、一个想法——本来就是痛苦的，是长时间一点点磨出来的。',
+    storyQuote: '我做 Contextly，最初是为了救我自己。',
+    storyNote:
+      '它不是又一个效率神器，而是我为了把自己从碎片里捞出来而做的工具：先看清注意力去了哪里，再把它拉回到真正重要的那件事上。',
+    storySignature: '—— 杨文麦，Contextly 作者',
+    screenshotsTitle: '应用截图',
+    screenshots: [
+      { title: '菜单栏状态', description: '菜单栏实时显示专注状态指示器' },
+      { title: '专注指标', description: '每日写作时间、阅读时间和上下文切换统计' },
+      { title: '会话详情', description: '最长专注会话的详细信息展示' },
+      { title: '高级分析', description: '工作模式识别和认知成本分析' },
+    ],
     mockCaption: '示意，不是你的数据',
     mockStatus: '正在备忘录中写作',
     mockSegment: '本段 06:12 · 自 09:41',
@@ -556,6 +630,44 @@ export default function App() {
           </figure>
         </section>
 
+        <section id="story" className="scroll-mt-20 border-t border-black/10 px-5 py-20 md:px-8 md:py-28">
+          <div className="mx-auto max-w-6xl">
+            <motion.div {...reveal} className="max-w-3xl">
+              <p className="text-xs font-semibold text-[#6B6B73]">{t.storyEyebrow}</p>
+              <h2 className="mt-4 text-3xl font-semibold leading-tight tracking-tight md:text-5xl">{t.storyTitle}</h2>
+            </motion.div>
+            <ol className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-[22px] border border-black/10 bg-black/10 md:grid-cols-4">
+              {t.storyScale.map((item, index) => (
+                <motion.li {...reveal} key={item.label} className="flex flex-col justify-between bg-white p-6">
+                  <div className="h-1 rounded-full bg-[#F4F4F1]">
+                    <div className={['h-full rounded-full', scaleBars[index]].join(' ')} />
+                  </div>
+                  <p className="mt-8 flex items-baseline gap-1.5">
+                    <span className="text-4xl font-semibold tracking-tight">{item.value}</span>
+                    {item.unit ? <span className="text-sm text-[#6B6B73]">{item.unit}</span> : null}
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-[#6B6B73]">{item.label}</p>
+                </motion.li>
+              ))}
+            </ol>
+            <div className="mt-12 grid gap-8 md:grid-cols-2 md:gap-16">
+              <motion.p {...reveal} className="text-lg leading-relaxed text-[#6B6B73]">
+                {t.storyPlatforms}
+              </motion.p>
+              <motion.p {...reveal} className="text-lg font-medium leading-relaxed">
+                {t.storyCounter}
+              </motion.p>
+            </div>
+            <motion.figure {...reveal} className="mt-16 border-l-2 border-[#5B5BD6] pl-6 md:pl-10">
+              <blockquote>
+                <p className="text-2xl font-semibold leading-snug tracking-tight md:text-3xl">“{t.storyQuote}”</p>
+                <p className="mt-5 max-w-2xl text-base leading-relaxed text-[#6B6B73]">{t.storyNote}</p>
+              </blockquote>
+              <figcaption className="mt-5 text-sm text-[#6B6B73]">{t.storySignature}</figcaption>
+            </motion.figure>
+          </div>
+        </section>
+
         <section className="border-t border-black/10 px-5 py-20 md:px-8 md:py-28">
           <div className="mx-auto max-w-6xl">
             <motion.div {...reveal} className="max-w-3xl">
@@ -625,6 +737,26 @@ export default function App() {
             <motion.div {...reveal} className="mt-8 rounded-[18px] bg-[#1B1B1F] p-6 text-white md:p-8">
               <h3 className="text-xl font-semibold tracking-tight">{t.privacyTitle}</h3>
               <p className="mt-3 max-w-3xl text-sm leading-relaxed text-white/70">{t.privacyDesc}</p>
+            </motion.div>
+          </div>
+        </section>
+
+        <section id="screenshots" className="scroll-mt-20 border-t border-black/10 bg-white px-5 py-20 md:px-8 md:py-28">
+          <div className="mx-auto max-w-6xl">
+            <motion.h2 {...reveal} className="text-center text-2xl font-semibold tracking-tight md:text-3xl">
+              {t.screenshotsTitle}
+            </motion.h2>
+            <motion.div {...reveal} className="mt-10">
+              <ScreenshotCarousel
+                screenshots={screenshotSources.map((src, index) => ({
+                  src,
+                  alt: t.screenshots[index].title,
+                  title: t.screenshots[index].title,
+                  description: t.screenshots[index].description,
+                }))}
+                autoPlay={!reduceMotion}
+                interval={5000}
+              />
             </motion.div>
           </div>
         </section>

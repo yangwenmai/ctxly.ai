@@ -50,35 +50,23 @@ export function ScreenshotCarousel({
 
   return (
     <div className={`relative w-full max-w-4xl mx-auto ${className}`}>
-      <Card className="overflow-hidden rounded-2xl shadow-lg">
-        <div className="relative aspect-video bg-gray-100">
+      <Card className="overflow-hidden rounded-[22px] border-black/10 shadow-[0_24px_60px_-36px_rgba(27,27,31,0.45)]">
+        <div className="relative aspect-[4/5] bg-[#F4F4F1] sm:aspect-[16/10]">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
-              initial={{ opacity: 0, x: 300 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -300 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="absolute inset-0"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.45, ease: "easeInOut" }}
+              className="absolute inset-0 p-6 sm:p-10"
             >
               <img
                 src={screenshots[currentIndex].src}
                 alt={screenshots[currentIndex].alt}
-                className="w-full h-full object-cover"
+                className="h-full w-full object-contain"
                 loading="lazy"
               />
-              {screenshots[currentIndex].title && (
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">
-                  <h3 className="text-white text-lg font-semibold mb-1">
-                    {screenshots[currentIndex].title}
-                  </h3>
-                  {screenshots[currentIndex].description && (
-                    <p className="text-white/90 text-sm">
-                      {screenshots[currentIndex].description}
-                    </p>
-                  )}
-                </div>
-              )}
             </motion.div>
           </AnimatePresence>
 
@@ -86,6 +74,7 @@ export function ScreenshotCarousel({
           {screenshots.length > 1 && (
             <>
               <button
+                type="button"
                 onClick={goToPrevious}
                 className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full p-2 transition-colors duration-200 backdrop-blur-sm"
                 aria-label="Previous screenshot"
@@ -95,6 +84,7 @@ export function ScreenshotCarousel({
                 </svg>
               </button>
               <button
+                type="button"
                 onClick={goToNext}
                 className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full p-2 transition-colors duration-200 backdrop-blur-sm"
                 aria-label="Next screenshot"
@@ -107,12 +97,22 @@ export function ScreenshotCarousel({
           )}
         </div>
 
+        {screenshots[currentIndex].title && (
+          <div className="border-t border-black/10 bg-white px-6 pt-5 text-center">
+            <h3 className="text-base font-semibold text-[#1B1B1F]">{screenshots[currentIndex].title}</h3>
+            {screenshots[currentIndex].description && (
+              <p className="mt-1 text-sm text-[#6B6B73]">{screenshots[currentIndex].description}</p>
+            )}
+          </div>
+        )}
+
         {/* Dots indicator */}
         {screenshots.length > 1 && (
-          <div className="flex justify-center space-x-2 py-4 bg-white">
+          <div className="flex justify-center space-x-2 bg-white py-4">
             {screenshots.map((_, index) => (
               <button
                 key={index}
+                type="button"
                 onClick={() => goToSlide(index)}
                 className={`w-2 h-2 rounded-full transition-colors duration-200 ${
                   index === currentIndex
